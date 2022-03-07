@@ -16,20 +16,20 @@ class Students {
         this.students = arr;
     }
     //22.	学生报数时，如果所报数字是3的倍数，那么不能说该数字，而要说Fizz;如果所报数字是5 的倍数，那么要说Buzz;如果所报数字是第7的倍数，那么要说Whizz。 
-    // handleTwo(){
-    //     for(let i = 0;i<this.students.length;i++){
-    //         let value = this.students[i];
-    //         if(value%3===0){
-    //           this.students[i] = 'Fizz';
-    //         }
-    //         if(value%5===0){
-    //             this.students[i] = 'Buzz';
-    //         }
-    //         if(value%7===0){
-    //             this.students[i] = 'Whizz';
-    //         }
-    //     }
-    // }
+    handleTwo(value:number){
+        // for(let i = 0;i<this.students.length;i++){
+        //     let value = this.students[i];
+            if(value%3===0){
+              return 'Fizz';
+            }
+            if(value%5===0){
+               return 'Buzz';
+            }
+            if(value%7===0){
+               return 'Whizz';
+            }
+        // }
+    }
     // 3.	学生报数时，如果所报数字同时是两个特殊数的倍数情况下，也要特殊处理，比如3和5的 倍数，那么不能说该数字，而是要说FizzBuzz, 以此类推。如果同时是三个特殊数的倍数， 那么要说FizzBuzzWhizz。 
     handleThree(value:number){
             let repeat = 0;
@@ -47,7 +47,7 @@ class Students {
                 repeat++
             }
             if(repeat===0){
-                p = value
+                p += value
             }
             return p
     }
@@ -65,20 +65,23 @@ class Students {
     //         // }
     //         return p
     // }
-    handleTest(){
+    handleTest(n:number){
+        if(n<1||n>this.students.length){
+            throw new RangeError('out of range');
+            
+        }
+        let arr  = [];
+        console.log(700000,n)
+
         for(let i = 0;i<this.students.length;i++){
             let value = this.students[i]
             let p:any 
-            if(value.toString().indexOf('3')>-1){
-                p = "Fizz";
-            }else{
                 p = this.handleThree(value)
-            }
-            console.log(p)
+            arr.push(p)
+           
         }
+        return arr[n-1]
     }
     
 }
-const students = new Students(105)
-students.setStudents();
-students.handleTest();
+export default Students
