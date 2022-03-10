@@ -1,87 +1,62 @@
 
 class Students {
-    num:Number = 100;
-    students:Array<any> = [];
+    num:Number;
     constructor(num:number){
         this.num = num;
-        // console.log(this.students)
-    }
-    //1设置学生数组
-    setStudents(){
-        let arr:Array<any> = [];
-        for(let i = 0;i<this.num;i++){
-            //每个学生都是正整数
-            arr.push(i+1);
-        }
-        this.students = arr;
-    }
-    //22.	学生报数时，如果所报数字是3的倍数，那么不能说该数字，而要说Fizz;如果所报数字是5 的倍数，那么要说Buzz;如果所报数字是第7的倍数，那么要说Whizz。 
-    handleTwo(value:number){
-        // for(let i = 0;i<this.students.length;i++){
-        //     let value = this.students[i];
-            if(value%3===0){
-              return 'Fizz';
-            }
-            if(value%5===0){
-               return 'Buzz';
-            }
-            if(value%7===0){
-               return 'Whizz';
-            }
-        // }
-    }
-    // 3.	学生报数时，如果所报数字同时是两个特殊数的倍数情况下，也要特殊处理，比如3和5的 倍数，那么不能说该数字，而是要说FizzBuzz, 以此类推。如果同时是三个特殊数的倍数， 那么要说FizzBuzzWhizz。 
+    } 
     handleThree(value:number){
             let repeat = 0;
             let p:any = '' ;
-            if(value%3===0){
+            let excludeHandle :number = 1;
+            if(value.toString().indexOf('7')>-1){
+                excludeHandle *= 5;
+            }else if(value.toString().indexOf('5')>-1){
+                excludeHandle *= 3;
+            }
+            if(value.toString().indexOf('3')>-1&&value.toString().indexOf('5')==-1){
+                return p = 'Fizz';
+            }
+            console.log(excludeHandle)
+            if(value%3===0&&excludeHandle%3!==0){
               p +='Fizz';
               repeat++;
             }
-            if(value%5===0){
+            if(value%5===0&&excludeHandle%5!==0){
                p += 'Buzz';
                repeat++
             }
-            if(value%7===0){
+            if(value%7===0&&excludeHandle%7!==0){
                 p += 'Whizz';
                 repeat++
             }
             if(repeat===0){
-                p += value
+                p = value
             }
             return p
     }
-    //4.	学生报数时，如果所报数字包含了3，那么也不能说该数字，而是要说相应的单词，比如要 报13的同学应该说Fizz。 
-    // handleFour(value:number){
-    //         let p = "";
-    //         if(value.toString().indexOf('3')>-1){
-    //            p = 'Fizz';
-    //         }
-    //         // if(value.toString().indexOf('5')>-1){
-    //         //     p = 'Buzz';
-    //         // }
-    //         // if(value.toString().indexOf('7')>-1){
-    //         //     p = 'Whizz';
-    //         // }
-    //         return p
+    // handleIndex(value:number){
+    //     let p:any = value ;
+    //     if(value.toString().indexOf('3')>0){
+    //         p = 'Fizz'
+    //     }if(value.toString().indexOf('5')>0){
+
+    //     }
+    //     return p
     // }
     handleTest(n:number){
-        if(n<1||n>this.students.length){
-            throw new RangeError('out of range');
-            
-        }
-        let arr  = [];
-        console.log(700000,n)
-
-        for(let i = 0;i<this.students.length;i++){
-            let value = this.students[i]
-            let p:any 
-                p = this.handleThree(value)
-            arr.push(p)
-           
-        }
-        return arr[n-1]
+        // if(n<1||n>this.students.length){
+        //     throw new RangeError('out of range');            
+        // }
+        // let p =  this.handleIndex(n);//this.handleThree(n);
+        // if(typeof(p)=='number'){
+            let p = this.handleThree(n);
+        // }
+    
+        return p
     }
     
 }
 export default Students
+const students = new Students(100)
+const a = students.handleTest(6)
+console.log(a)
